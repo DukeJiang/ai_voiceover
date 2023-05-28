@@ -4,10 +4,10 @@ import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetVoicesQuery, usePostTextMutation } from "../services/article";
 
 const Demo = () => {
-  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [selectedVoice, setSelectedVoice] = useState("en-US-1");
   const [allVoices, setAllVoices] = useState([]);
   const [article, setArticle] = useState({
-    voice_code: "",
+    voice_code: "en-US-1",
     text: "",
     audio_url: "",
   });
@@ -84,8 +84,45 @@ const Demo = () => {
 
   return (
     <div>
+      <section>
+        {/* Display Result */}
+        <div className='my-10 max-w-full flex justify-center items-center'>
+          {isLoading ? (
+            <img src={loader} alt='loader' className='w-20 h-20 object-contain' />
+          ) : error ? (
+            <p className='font-inter font-bold text-black text-center'>
+              Well, that wasn't supposed to happen...
+              <br />
+              <span className='font-satoshi font-normal text-gray-700'>
+                {error?.data?.error}
+              </span>
+            </p>
+          ) : (
+            article.audio_url && (
+              <div className='flex flex-col gap-3'>
+                <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
+                  <span className='blue_gradient'>AUDIO CLIP</span>
+                </h2>
+                <div className='summary_box'>
+                  {/* <p className='font-inter font-medium text-sm text-gray-700'>
+                    {article.audio_url}
+                  </p> */}
+                  <div className='flex justify-center items-center'>
+                    <audio controls key={article.audio_url}>
+                      <source src={article.audio_url} type='audio/mp3'/>
+                    </audio>
+                  </div>
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      </section>
       <section className='mt-16 w-full max-w-xl'>
         {/* All voices */}
+        <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
+                  <span className='blue_gradient'>ALL VOICES</span>
+        </h2>
         <div className='flex flex-wrap gap-1 max-h-10 overflow-y-auto'>
           {allVoices.map((item, index) => (
             <div
@@ -109,6 +146,9 @@ const Demo = () => {
       <section className='mt-16 w-full max-w-xl'>
 
         {/* Search */}
+        <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
+                  <span className='blue_gradient'>INPUT YOUR SCRIPT</span>
+        </h2>
         <div className='flex flex-col w-full gap-2'>
           <form
             className='relative flex justify-center items-center'
@@ -133,6 +173,9 @@ const Demo = () => {
         </div>
 
         {/* Browse History */}
+        <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
+                  <span className='blue_gradient'>HISTORY</span>
+        </h2>
         <div className='flex flex-col gap-1 max-h-10 overflow-y-auto'>
           {allArticles.reverse().map((item, index) => (
             <div
@@ -158,38 +201,6 @@ const Demo = () => {
           ))}
         </div>
 
-        {/* Display Result */}
-        <div className='my-10 max-w-full flex justify-center items-center'>
-          {isLoading ? (
-            <img src={loader} alt='loader' className='w-20 h-20 object-contain' />
-          ) : error ? (
-            <p className='font-inter font-bold text-black text-center'>
-              Well, that wasn't supposed to happen...
-              <br />
-              <span className='font-satoshi font-normal text-gray-700'>
-                {error?.data?.error}
-              </span>
-            </p>
-          ) : (
-            article.audio_url && (
-              <div className='flex flex-col gap-3'>
-                <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
-                  Audio <span className='blue_gradient'>CLIP</span>
-                </h2>
-                <div className='summary_box'>
-                  {/* <p className='font-inter font-medium text-sm text-gray-700'>
-                    {article.audio_url}
-                  </p> */}
-                  <div className='flex justify-center items-center'>
-                    <audio controls key={article.audio_url}>
-                      <source src={article.audio_url} type='audio/mp3'/>
-                    </audio>
-                  </div>
-                </div>
-              </div>
-            )
-          )}
-        </div>
       </section>
     </div>
   );
