@@ -146,6 +146,7 @@ const Demo = () => {
           value = {selectedVoice}
           onChange={(event) => {
             setSelectedVoice(event.target.value);
+            setArticle({...article, voice_code: event.target.value})
           }}
           className="voice_dropdown">
           
