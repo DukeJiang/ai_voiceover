@@ -85,7 +85,7 @@ const Demo = () => {
   return (
     <div>
       <section>
-        {/* Display Result */}
+        {/* Display Audio */}
         <div className='my-10 max-w-full flex justify-center items-center'>
           {isLoading ? (
             <img src={loader} alt='loader' className='w-20 h-20 object-contain' />
@@ -118,12 +118,13 @@ const Demo = () => {
           )}
         </div>
       </section>
+
       <section className='mt-16 w-full max-w-xl'>
         {/* All voices */}
         <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
                   <span className='blue_gradient'>ALL VOICES</span>
         </h2>
-        <div className='flex flex-wrap gap-1 max-h-10 overflow-y-auto'>
+        {/* <div className='flex flex-wrap gap-1 max-h-10 overflow-y-auto'>
           {allVoices.map((item, index) => (
             <div
               key={`voice-${index}`}
@@ -140,7 +141,23 @@ const Demo = () => {
               </p>
             </div>
           ))}
-        </div>
+        </div> */}
+        <select
+          value = {selectedVoice}
+          onChange={(event) => {
+            setSelectedVoice(event.target.value);
+          }}
+          className="voice_dropdown">
+          
+              
+          <option value="">Select a voice</option>
+          {allVoices.map((item, index) => (
+            <option key={`voice-${index}`} value={item.voice_code}>
+              {item.voice_code}
+            </option>
+          ))}
+
+        </select>
       </section>
 
       <section className='mt-16 w-full max-w-xl'>

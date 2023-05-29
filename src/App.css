@@ -104,7 +104,7 @@
   font-weight: 500;
   border: 1px solid #e2e8f0;
   background-color: transparent;
-  color: orange; /* Set the desired text color */
+  color: black; /* Set the desired text color */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   outline: none;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -116,7 +116,9 @@
 }
 
 .submit_btn {
-  @apply hover:border-gray-700 hover:text-gray-700 absolute inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400;
+  @apply hover:border-gray-700 hover:text-gray-700 inset-y-0 right-0 my-1.5 mr-1.5 flex w-10 items-center justify-center rounded border border-gray-200 font-sans text-sm font-medium text-gray-400;
+  width: 100%;
+  background-color: rgba(255, 165, 0, 0.4)
 }
 
 .link_card {
@@ -156,4 +158,20 @@
 
 .summary_box {
   @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-4;
+}
+
+.voice_dropdown {
+  padding: 0.5rem 1rem;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  background-color: rgba(255, 165, 0, 0.3);
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.voice_dropdown option {
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
 }
